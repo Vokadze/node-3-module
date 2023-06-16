@@ -56,7 +56,7 @@ app.put('/:title', async (req, res) => {
     title: 'Express App',
     notes: await getNotes(),
     created: false,
-    middleware: false,
+    middleware: JSON,
   })
 })
 

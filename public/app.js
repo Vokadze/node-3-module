@@ -13,17 +13,14 @@ document.addEventListener('click', (event) => {
 
 document.addEventListener('click', (event) => {
   if (event.target.dataset.type === 'rename') {
-    const title = event.target.dataset.id
+    let title = event.target.dataset.id
     console.log('title', title)
 
-    const newTitlePrompt = prompt('Введите новое название', `${title}`.trim())
-    console.log('newTitlePrompt', newTitlePrompt)
+    const newTitleName = prompt('Введите новое название', `${title}`.trim())
+    console.log('newTitleName', newTitleName)
 
-    const titlePut = title.replaceAll(title, newTitlePrompt)
-
-    rename(titlePut).then(() => {
-      event.target.dataset.id
-      console.log('rename', titlePut)
+    rename(newTitleName).then(() => {
+      return event.target.dataset.id.replace(title, newTitleName)
     })
   }
 })
@@ -32,6 +29,6 @@ async function remove(id) {
   await fetch(`/${id}`, { method: 'DELETE' })
 }
 
-async function rename(titlePut) {
-  await fetch(`/${titlePut}`, { method: 'PUT' })
+async function rename(newTitleName) {
+  await fetch(`/${JSON.stringify(newTitleName)}`, { method: 'PUT' })
 }
