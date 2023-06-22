@@ -39,6 +39,7 @@ async function removeNote(id) {
   const notes = await getNotes()
 
   const filtered = notes.filter((note) => note.id !== id)
+  console.log(filtered)
 
   await saveNotes(filtered)
   console.log(chalk.red(`Note with id="${id}" has been removed.`))
@@ -47,10 +48,12 @@ async function removeNote(id) {
 async function renameNote(title) {
   const notes = await getNotes()
 
-  const filtered = notes.filter((note) => note.title === note.title)
+  const filtered = notes.filter((note) => {
+    return (note.title = note.title.replace(note.title, title))
+  })
 
   await saveNotes(filtered)
-  console.log(chalk.yellow(`The note newTitleName=${title} has been change`))
+  console.log(chalk.yellow(`The note newTitleName=${title} has been rename`))
 }
 
 module.exports = {

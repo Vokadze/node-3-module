@@ -51,12 +51,12 @@ app.delete('/:id', async (req, res) => {
 
 app.put('/:title', async (req, res) => {
   console.log('title', req.params.title)
+  //  await removeNote(req.params.title)
   await renameNote(req.params.title)
   res.render('index', {
     title: 'Express App',
     notes: await getNotes(),
     created: false,
-    middleware: JSON,
   })
 })
 
